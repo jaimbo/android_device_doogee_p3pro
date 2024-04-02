@@ -9,14 +9,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit some common TWRP stuff.
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from P3Pro device
 $(call inherit-product, device/doogee/P3Pro/device.mk)
 
 PRODUCT_DEVICE := P3Pro
-PRODUCT_NAME := omni_P3Pro
+PRODUCT_NAME := twrp_P3Pro
 PRODUCT_BRAND := DOOGEE
 PRODUCT_MODEL := T30Pro
 PRODUCT_MANUFACTURER := doogee
