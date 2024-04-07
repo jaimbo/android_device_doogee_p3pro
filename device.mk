@@ -10,7 +10,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 #Adds GSI keys to allow booting of GSIs with AVB
 
 # Enable updating of APEXes
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Enable project quotas and casefolding for emulated storage without sdcardfs - SDCard replacement functionality
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
@@ -62,17 +62,16 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-# # Boot control HAL
-# PRODUCT_PACKAGES += \
-     android.hardware.boot@1.2-mtkimpl \
-     android.hardware.boot@1.2-mtkimpl.recovery \
-     android.hardware.boot@1.2-service
-
-#Install PRODUCT_PACKAGES to vendor_boot/system/bin
+# Bootctrl
 PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-mtkimpl \
+    android.hardware.boot@1.2-mtkimpl.recovery \
+    bootctrl
 
+# Health Hal
 PRODUCT_PACKAGES += \
-    bootctrl.mt6789
+    android.hardware.health@2.0-impl \
+    android.hardware.health@2.0-service
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -99,12 +98,6 @@ PRODUCT_PACKAGES += \
  PRODUCT_PACKAGES += \
      mtk_plpath_utils \
      mtk_plpath_utils.recovery
-
-# Health
-# PRODUCT_PACKAGES += \
-     android.hardware.health@2.1-impl \
-     android.hardware.health@2.1-service \
-     android.hardware.health
 
 # Product characteristics
 PRODUCT_CHARACTERISTICS := tablet

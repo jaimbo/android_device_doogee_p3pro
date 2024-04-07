@@ -1,6 +1,4 @@
-on boot
-    exec u:r:update_engine:s0 root root -- /system/bin/mtk_plpath_utils
-
+import /init.recovery.project.rc
 import /init.recovery.microtrust.rc
 
 on init
@@ -87,3 +85,7 @@ service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     oneshot
     disabled
     seclabel u:r:recovery:s0
+
+on boot
+    start boot-hal-1-2
+    start health-hal-2-0
