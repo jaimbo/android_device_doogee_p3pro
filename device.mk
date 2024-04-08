@@ -89,9 +89,12 @@ PRODUCT_PACKAGES += \
     snapuserd.recovery \
     mkfs.erofs.recovery
 
-# fastbootd
+# Fastbootd stuff
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mtk \
+    android.hardware.fastboot@1.0-impl-mtk.recovery \
+    android.hardware.fastboot@1.1-impl-mock \
+    android.hardware.fastboot@1.1-impl-mock.recovery \
     fastbootd
 
 # # Build MT-PL-Utils
