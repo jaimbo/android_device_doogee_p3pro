@@ -24,6 +24,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_ven
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 #Install init_first_stage, snapuserd_ramdisk
 
+# Enabling this property, will improve OTA install time
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+
 LOCAL_PATH := device/doogee/P3Pro
 
 # API
@@ -83,10 +86,8 @@ PRODUCT_PACKAGES += \
 	resize2fs.vendor_ramdisk \
 	fsck.vendor_ramdisk \
 	tune2fs.vendor_ramdisk \
-    snapuserd.vendor_ramdisk
 
 PRODUCT_PACKAGES += \
-    snapuserd.recovery \
     mkfs.erofs.recovery
 
 # Fastbootd stuff
