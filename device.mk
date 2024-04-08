@@ -87,9 +87,6 @@ PRODUCT_PACKAGES += \
 	fsck.vendor_ramdisk \
 	tune2fs.vendor_ramdisk \
 
-PRODUCT_PACKAGES += \
-    mkfs.erofs.recovery
-
 # Fastbootd stuff
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mtk \
