@@ -26,6 +26,13 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     disabled
     seclabel u:r:recovery:s0
 
+service keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
+    class early_hal
+    user root
+    group root drmrpc
+    disabled
+    seclabel u:r:recovery:s0
+
 service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     class hal
@@ -34,14 +41,8 @@ service gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service
     disabled
     seclabel u:r:recovery:s0
 
-service keymint-beanpod /vendor/bin/hw/android.hardware.security.keymint@1.0-service.beanpod
-    class early_hal
-    user root
-    group root drmrpc
-    disabled
-    seclabel u:r:recovery:s0
-
 on property:vendor.sys.listener.registered=true
+    start teei_daemon
     start gatekeeper-1-0
     start keymint-beanpod
 
@@ -49,8 +50,9 @@ on property:crypto.ready=1
     start keymint-beanpod
 
 on property:hwservicemanager.ready=true
-    start keymint-beanpod
+    start teei_daemon
     start gatekeeper-1-0
+    start keymint-beanpod
 
 on property:ro.crypto.state=unsupported
     stop teei_daemon
