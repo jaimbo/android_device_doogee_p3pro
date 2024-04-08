@@ -144,6 +144,7 @@ BOARD_RAMDISK_USE_LZ4 := true
 
 # Recovery
 TARGET_NO_RECOVERY := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 
 # MTK Hardware
 BOARD_HAS_MTK_HARDWARE := true
