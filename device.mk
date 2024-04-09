@@ -6,7 +6,7 @@
 #
 
 # Configure gsi_keys.mk
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 #Adds GSI keys to allow booting of GSIs with AVB
 
 # Enable updating of APEXes
