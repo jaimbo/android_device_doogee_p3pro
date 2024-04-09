@@ -61,8 +61,20 @@ TARGET_KERNEL_SOURCE := kernel/doogee/P3Pro
 #BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+
+# From lopestom -- vendor_dlkm & odm_dlkm partition
+# Reference: https://source.android.com/docs/core/architecture/partitions/vendor-odm-dlkm-partition#build-support
+# Build a separate vendor_dlkm partition
+BOARD_USES_VENDOR_DLKMIMAGE := true
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+
+# Build a separate odm_dlkm partition
+BOARD_USES_ODM_DLKMIMAGE := true
+BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -71,6 +83,8 @@ BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+
 BOARD_SUPER_PARTITION_SIZE := 9126805504 # TODO: Fix hardcoded value
 BOARD_SUPER_PARTITION_GROUPS := doogee_dynamic_partitions
 BOARD_DOOGEE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
@@ -105,7 +119,9 @@ PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
-DEVICE_RESOLUTION := 1600x2560
+#DEVICE_RESOLUTION := 1600x2560
+TARGET_SCREEN_WIDTH := 1600
+TARGET_SCREEN_HEIGHT := 2560
 TW_EXTRA_LANGUAGES := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
@@ -124,7 +140,7 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 TW_FRAMERATE := 60
 TARGET_USES_MKE2FS := true
-TW_NO_FASTBOOT_BOOT := true
+#TW_NO_FASTBOOT_BOOT := true
 TW_HAS_NO_RECOVERY_PARTITION := true
 
 # Python
@@ -141,7 +157,8 @@ BOARD_RAMDISK_USE_LZ4 := true
 
 # Recovery
 TARGET_NO_RECOVERY := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
+# Only enable if you have recovery.fstab as same twrp.flag
+#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 
 # MTK Hardware
 BOARD_HAS_MTK_HARDWARE := true
@@ -152,9 +169,6 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/vendor.prop
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
-
-TARGET_SCREEN_WIDTH := 1600
-TARGET_SCREEN_HEIGHT := 2560
 
 # Treble
 BOARD_VNDK_VERSION := current
